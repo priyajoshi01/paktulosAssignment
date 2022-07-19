@@ -19,7 +19,6 @@ const validateRegisterInput = require("../validate");
 // }
 router.post('/api/register',async (req,res)=>
 {
- console.log("register api") 
 const response= validateRegisterInput.registerValidation(req.body);
     //check Validation
     if(response.error)
@@ -29,15 +28,13 @@ const response= validateRegisterInput.registerValidation(req.body);
     
     }    
     try {
-    console.log("ID...user")  
     const { name, email , education } = req.body
-    const user = new User({name,email,education});
+    const user =await User.create({name,email,education});
     await user.save()
-    const token = await jwt.sign({ id: '45' }, 'abc');
+    const token = await jwt.sign({ id: user.dataValues.id }, 'secret');
     user.token =token
     await user.save()
-   
-    res.status(201).send('User added with ID')
+    res.status(201).send({ user, token })
     }catch (e) {
       res.status(400).send(e)
   }

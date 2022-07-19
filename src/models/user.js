@@ -21,8 +21,7 @@ education: {
 
 },
     token: {
-        type: Sequelize.STRING,
-        // allowNull: false
+        type: Sequelize.STRING
     }
 
 

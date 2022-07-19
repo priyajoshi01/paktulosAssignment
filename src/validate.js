@@ -4,6 +4,7 @@ const Joi=require('@hapi/joi')
     var re = /^(?:\d{10}|\w+@\w+\.\w{2,3})$/;
     const schema=Joi.object(
       {
+     
       email:Joi.string().pattern(re).required().messages({
         "string.empty": `"email" cannot be an empty field`,
         "any.required": `"email" is a required field`,

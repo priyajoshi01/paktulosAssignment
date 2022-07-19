@@ -10,7 +10,9 @@ const userOne = {
 }
  
 const setupDatabase = async () => {
-    await new User(userOne).save()
+    const user= User.build({name:"priya",email:"a@gmail.com",education:"kkf"})
+    console.log("saved")
+    await user.save()
 }
 
 module.exports = {
