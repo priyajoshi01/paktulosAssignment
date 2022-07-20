@@ -28,5 +28,4 @@ education: {
 });
 
 
-User.sync({ force: true })
 module.exports =User

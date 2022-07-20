@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('postgres://postgres:db@123@localhost/first_database');
+require('dotenv').config();
+const sequelize = new Sequelize(process.env.CONNECT_URL);
 try {
    sequelize.authenticate();
   console.log('Connection has been established successfully.');

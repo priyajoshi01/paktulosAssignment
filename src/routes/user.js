@@ -32,18 +32,26 @@ const response= validateRegisterInput.registerValidation(req.body);
     const { name, email , education } = req.body
     const user =await User.create({name,email,education});
     await user.save()
-    const token = await jwt.sign({ id: user.dataValues.id }, process.env.JWT_SECRET);
-    user.token =token
-    await user.save()
-    res.status(201).send({ user, token })
+    res.status(201).send({ user})
     }catch (e) {
       res.status(400).send(e)
   }
 
 })
 
-router.get('/users/me', auth, async (req, res) => {
-  res.send(req.user)
+router.get('/users/id',auth,async (req, res) => {
+  
+             const id = req.params.id;
+             try {
+             var user = await User.findOne({where:{id:id}});
+             res.status(201).send({user})
+             }catch(e)
+             {
+              res.status(400).send(e)
+  
+             }
+       
+  
 })
 
 module.exports = router;
