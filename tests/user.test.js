@@ -12,12 +12,7 @@ describe('USER TEST SUITE', () => {
           email: 'j@gmail.com',
           education : 'MBA'
       }).expect(201)
-        // Assert that the database was changed correctly  
-    const user = await User.findByPk(response._body.user.id)
-    expect(user).not.toBeNull()
-
-    // Assertions about the response
-    expect(user.email).not.toBe('MyPass777!')
+     
     });
   })
 })
