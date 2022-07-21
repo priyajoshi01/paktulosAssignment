@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const auth=require('../middleware/auth')
 require('dotenv').config();
-
+const createUser=require('../controllers/createUser')
 // Load Input Validation
 const validateRegisterInput = require("../validate");
 
@@ -30,9 +30,9 @@ const response= validateRegisterInput.registerValidation(req.body);
     }    
     try {
     const { name, email , education } = req.body
-    const user =await User.create({name,email,education});
-    await user.save()
-    res.status(201).send({ user})
+
+    const user =await createUser(name,email,education);
+    return user
     }catch (e) {
       res.status(400).send(e)
   }
